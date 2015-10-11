@@ -1,4 +1,4 @@
-# Naver Crawlery
+# Naver Crawler
 
 scraps blog posts and product reviews of naver.
 
@@ -25,7 +25,7 @@ cd ./naver-crawler/naver_crawler # second is 'underscore'!
 
 Below functions are provided as terminal command
 
-### API: Crawling shopping reviews
+### API: Crawling product reviews
 
 `scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}`
 
