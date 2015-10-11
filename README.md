@@ -12,7 +12,10 @@ scraps blog posts and product reviews of naver.
 
 there can be occured errors with OS X. perhaps, you need googling to solve them.
 
-When can't find image: `export DYLD_LIBRARY_PATH=$HOME/anaconda/lib`
+if you
+
+* can't find image: execute this command in terminal: `export DYLD_LIBRARY_PATH=$HOME/anaconda/lib`
+* can't import xmlrpc_clinet: read [this stack overflow answers](http://stackoverflow.com/questions/30964836/scrapy-throws-importerror-cannot-import-name-xmlrpc-client)
 
 ## Installation
 
@@ -23,7 +26,11 @@ cd ./naver-crawler/naver_crawler # second is 'underscore'!
 
 ## Usage
 
-Below functions are provided as terminal command
+Below functions are provided as terminal command. `{$variable:type}` format should be converted to normal text. Like this:
+
+* {$a:int}: 111
+* {$b:string}: fefwfe11021fwe
+* {$c:string,JSON}: [{"JSON":"type"}]
 
 ### API: Crawling product reviews
 
@@ -42,5 +49,5 @@ scrapy crawl naver-blog -a search="{$keyword:string}" -o {$filename:string}
 
 *care above $keyword should be in quotes if $keyword contains spaces*
 
-* $keyword: word to search
+* $keyword: word to search in naver blog posts
 * $filename: destination of result file
