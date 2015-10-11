@@ -34,7 +34,8 @@ Below functions are provided as terminal command
 
 ### API: Crawling blog posts
 
-`scrapy crawl naver-blog -a search={$keyword} -o {$filename}`
+`scrapy crawl naver-blog -a search="{$keyword}" -o {$filename}`
+*care $keyword should be in quotes if $keyword contains spaces*
 
 * $keyword: word to search
 * $filename: destination of result file
