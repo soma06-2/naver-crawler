@@ -22,14 +22,14 @@ class ShoppingSpider(scrapy.Spider):
         max_pages = int(math.ceil(int(response.xpath(
             '//*[@id="review_user"]/em/text()').extract()[0].replace(',', '')) / 20))
 
-        for i in xrange(1, max_pages + 1):
+        for i in xrange(1, max_pages + 2):
             yield scrapy.Request(self.getURL(i), callback=self.bringContent)
 
     def bringContent(self, response):
-        for item in response.xpath('//*[@id="lst_review"]/li/div[1]/div[2]/text()').extract():
+        for row in response.xpath('//*[@id="lst_review"]/li'):
             review = Review()
 
-            review['content'] = item.strip()
+            review['content'] = ''.join(row.css('.atc::text').extract()).strip()
 
             if len(review['content']) == 0:
                 continue

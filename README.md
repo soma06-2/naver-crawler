@@ -27,15 +27,20 @@ Below functions are provided as terminal command
 
 ### API: Crawling product reviews
 
-`scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}`
+```sh
+scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}
+```
 
 * $productId: naver product id
 * $filename: destination of result file
 
 ### API: Crawling blog posts
 
-`scrapy crawl naver-blog -a search="{$keyword:string}" -o {$filename:string}`
-*care $keyword should be in quotes if $keyword contains spaces*
+```
+scrapy crawl naver-blog -a search="{$keyword:string}" -o {$filename:string}
+```
+
+*care above $keyword should be in quotes if $keyword contains spaces*
 
 * $keyword: word to search
 * $filename: destination of result file

@@ -1,5 +1,4 @@
 .DS_Store
-.pyc
-.json
-.tmp
-
+*.pyc
+*.json
+*.tmp
