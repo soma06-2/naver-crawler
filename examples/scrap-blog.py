@@ -2,6 +2,10 @@
 # import scrapy
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
+
+import sys
+sys.path.insert(0, '../')
+
 from naver_crawler.spiders.blog import BlogSpider
 
 results = []
