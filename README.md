@@ -6,7 +6,9 @@ scraps blog posts and product reviews of naver.
 
 ### Scrapy
 
-`sudo pip install scrapy`
+```sh
+$ sudo pip install scrapy
+```
 
 #### when troubles come from other libraries
 
@@ -20,7 +22,7 @@ if you
 ## Installation
 
 ```sh
-git clone git@github.com:soma06-2/naver-crawler.git
+$ git clone git@github.com:soma06-2/naver-crawler.git
 ```
 
 prepend belew code to your python script to use crawler
@@ -62,7 +64,7 @@ for review in results:
 #### Through Terminal
 
 ```sh
-scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}
+$ scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}
 ```
 
 ##### Parameters
@@ -102,8 +104,8 @@ for review in results:
 
 #### Through Terminal
 
-```
-scrapy crawl naver-blog -a search="{$keyword:string}" -o {$filename:string}
+```sh
+$ scrapy crawl naver-blog -a search="{$keyword:string}" -o {$filename:string}
 ```
 
 *care above `$keyword` should be in quotes if `$keyword` contains spaces.*
