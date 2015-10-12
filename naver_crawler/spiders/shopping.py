@@ -9,20 +9,21 @@ class ShoppingSpider(scrapy.Spider):
     # allowed_domains = ["sho.org"]
     # start_urls = [getPageURL(1)]
 
-    def __init__(self, entityId):
+    def __init__(self, results, entityId):
         self.entityId = entityId
-
         self.start_urls = [
             "http://shopping.naver.com/detail/detail.nhn?nv_mid=%s" % (self.entityId)]
+
+        if isinstance(results, list):
+            self.results = results
 
     def getURL(self, page):
         return "http://shopping.naver.com/detail/section_user_review.nhn?nv_mid=%s&page=%s" % (self.entityId, page)
 
     def parse(self, response):
-        max_pages = int(math.ceil(int(response.xpath(
-            '//*[@id="review_user"]/em/text()').extract()[0].replace(',', '')) / 20))
+        max_pages = int(math.ceil(int(response.xpath('//*[@id="review_user"]/em/text()').extract()[0].replace(',', '')) / 20))
 
-        for i in xrange(1, max_pages + 2):
+        for i in xrange(1, max_pages + 3):
             yield scrapy.Request(self.getURL(i), callback=self.bringContent)
 
     def bringContent(self, response):
@@ -33,5 +34,8 @@ class ShoppingSpider(scrapy.Spider):
 
             if len(review['content']) == 0:
                 continue
+
+            if isinstance(self.results, list):
+                self.results.append(review)
 
             yield review

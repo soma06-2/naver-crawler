@@ -24,6 +24,58 @@ git clone git@github.com:soma06-2/naver-crawler.git
 cd ./naver-crawler
 ```
 
+## Examples
+
+Below explains how to use naver-crawler in python script. If you need more options, see [Scrapy Configuration](http://doc.scrapy.org/en/master/topics/settings.html).
+
+### Crawling Naver Product
+```py
+# -*- coding: utf-8 -*-
+# import scrapy
+from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
+from naver_crawler.spiders.blog import BlogSpider
+
+results = []
+
+proc = CrawlerProcess(get_project_settings())
+
+proc.crawl('naver-shopping', results, '7789434971')
+proc.start()
+
+print "Total Reviews: %d" % (len(results))
+print ""
+
+for review in results:
+    print '#'*50
+    print review['content']
+    print ""
+```
+
+### Crawling Naver Blog Posts
+```py
+# -*- coding: utf-8 -*-
+# import scrapy
+from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
+from naver_crawler.spiders.blog import BlogSpider
+
+results = []
+
+proc = CrawlerProcess(get_project_settings())
+
+proc.crawl('naver-blog', results, u'피플 킬링 피플 다잉')
+proc.start()
+
+print "Total Reviews: %d" % (len(results))
+print ""
+
+for review in results:
+    print '#'*50
+    print review['content']
+    print ""
+```
+
 ## Usage
 
 Below functions are provided as terminal command. `{$variable:type}` format should be converted to normal text. Like this:
