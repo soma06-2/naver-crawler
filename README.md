@@ -20,8 +20,8 @@ if you
 ## Installation
 
 ```sh
-git clone # fill repository address
-cd ./naver-crawler/naver_crawler # second is 'underscore'!
+git clone git@github.com:soma06-2/naver-crawler.git
+cd ./naver-crawler
 ```
 
 ## Usage
@@ -38,8 +38,22 @@ Below functions are provided as terminal command. `{$variable:type}` format shou
 scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}
 ```
 
+#### Parameters
+
 * $productId: naver product id
 * $filename: destination of result file
+
+#### Result
+
+```js
+[{"content": "Review 1"},
+{"content": "Review 2"},
+{"content": "Review 3"},
+....
+....
+....
+{"content": "Review n"}]
+```
 
 ### API: Crawling blog posts
 
@@ -47,7 +61,21 @@ scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}
 scrapy crawl naver-blog -a search="{$keyword:string}" -o {$filename:string}
 ```
 
-*care above $keyword should be in quotes if $keyword contains spaces*
+*care above `$keyword` should be in quotes if `$keyword` contains spaces.*
+
+#### Parameters
 
 * $keyword: word to search in naver blog posts
 * $filename: destination of result file
+
+#### Result
+
+```js
+[{"content": "Post 1"},
+{"content": "Post 2"},
+{"content": "Post 3"},
+....
+....
+....
+{"content": "Post n"}]
+```
