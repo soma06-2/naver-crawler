@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 # import scrapy
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
-
 import sys
 sys.path.insert(0, '../')
 
-from naver_crawler.spiders.blog import BlogSpider
+from crawler import NaverCrawler
 
-results = []
+crawler = NaverCrawler()
 
-proc = CrawlerProcess(get_project_settings())
-
-proc.crawl('naver-shopping', results, '7789434971')
-proc.start()
+results = crawler.find_product_reviews(7789434971)
 
 print "Total Reviews: %d" % (len(results))
 print ""

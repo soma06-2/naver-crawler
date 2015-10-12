@@ -21,60 +21,17 @@ if you
 
 ```sh
 git clone git@github.com:soma06-2/naver-crawler.git
-cd ./naver-crawler
 ```
 
-## Examples
+prepend belew code to your python script to use crawler
 
-Below explains how to use naver-crawler in python script. If you need more options, see [Scrapy Configuration](http://doc.scrapy.org/en/master/topics/settings.html).
-
-### Crawling Naver Product
 ```py
-# -*- coding: utf-8 -*-
-# import scrapy
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
-from naver_crawler.spiders.blog import BlogSpider
-
-results = []
-
-proc = CrawlerProcess(get_project_settings())
-
-proc.crawl('naver-shopping', results, '7789434971')
-proc.start()
-
-print "Total Reviews: %d" % (len(results))
-print ""
-
-for review in results:
-    print '#'*50
-    print review['content']
-    print ""
+from naver_crawler.crawler import NaverCrawler
 ```
 
-### Crawling Naver Blog Posts
-```py
-# -*- coding: utf-8 -*-
-# import scrapy
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
-from naver_crawler.spiders.blog import BlogSpider
+## Configuration
 
-results = []
-
-proc = CrawlerProcess(get_project_settings())
-
-proc.crawl('naver-blog', results, u'피플 킬링 피플 다잉')
-proc.start()
-
-print "Total Reviews: %d" % (len(results))
-print ""
-
-for review in results:
-    print '#'*50
-    print review['content']
-    print ""
-```
+If you need more options such as download delay, max depth, domain restrict and timeout, etc, then see [Scrapy Configuration](http://doc.scrapy.org/en/master/topics/settings.html).
 
 ## Usage
 
@@ -86,16 +43,34 @@ Below functions are provided as terminal command. `{$variable:type}` format shou
 
 ### API: Crawling product reviews
 
+#### in Python Script
+
+```py
+crawler = NaverCrawler()
+
+results = crawler.find_product_reviews(7789434971)
+
+print "Total Reviews: %d" % (len(results))
+print ""
+
+for review in results:
+    print '#'*50
+    print review['content']
+    print ""
+```
+
+#### Through Terminal
+
 ```sh
 scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}
 ```
 
-#### Parameters
+##### Parameters
 
 * $productId: naver product id
 * $filename: destination of result file
 
-#### Result
+##### Result
 
 ```js
 [{"content": "Review 1"},
@@ -109,18 +84,36 @@ scrapy crawl naver-shopping -a entityId={$productId:int} -o {$filename:string}
 
 ### API: Crawling blog posts
 
+#### in Python Script
+
+```py
+crawler = NaverCrawler()
+
+results = crawler.find_blog_posts(u'피플 킬링 피플 다잉')
+
+print "Total Reviews: %d" % (len(results))
+print ""
+
+for review in results:
+    print '#'*50
+    print review['content']
+    print ""
+```
+
+#### Through Terminal
+
 ```
 scrapy crawl naver-blog -a search="{$keyword:string}" -o {$filename:string}
 ```
 
 *care above `$keyword` should be in quotes if `$keyword` contains spaces.*
 
-#### Parameters
+##### Parameters
 
 * $keyword: word to search in naver blog posts
 * $filename: destination of result file
 
-#### Result
+##### Result
 
 ```js
 [{"content": "Post 1"},
